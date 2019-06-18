@@ -2,39 +2,241 @@
 const contractABI = [
 	{
 		"constant": false,
-		"inputs": [
-			{
-				"name": "paramEndereco",
-				"type": "address"
-			},
-			{
-				"name": "paramNomeProprietario",
-				"type": "string"
-			},
-			{
-				"name": "paramValorVenal",
-				"type": "uint256"
-			}
-		],
-		"name": "registraImovel",
+		"inputs": [],
+		"name": "cancelamentoEEstornoDeTodos",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"constant": true,
+		"constant": false,
 		"inputs": [
 			{
-				"name": "matricula",
+				"name": "nomeClienteEstorno",
+				"type": "string"
+			}
+		],
+		"name": "estornoIndividual",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "pousoSeguro",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "nomePassageiro",
+				"type": "string"
+			},
+			{
+				"name": "carteiraCliente",
+				"type": "address"
+			},
+			{
+				"name": "estornoParaAgencia",
+				"type": "bool"
+			}
+		],
+		"name": "reserva",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "_limiteAviao",
+				"type": "uint256"
+			},
+			{
+				"name": "_valorPassagem",
+				"type": "uint256"
+			},
+			{
+				"name": "_dataEncerramentoVendas",
+				"type": "uint256"
+			},
+			{
+				"name": "_carteiraCompanhiaAerea",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "aviso",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "nomePassageiro",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "carteiraAgencia",
+				"type": "address"
+			}
+		],
+		"name": "reservaEfetuada",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "aviso",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "nomePassageiro",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "carteiraAgencia",
+				"type": "address"
+			}
+		],
+		"name": "pousoEfetuadoComSucesso",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "nomePassageiro",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"name": "carteiraEstorno",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "valorEstorno",
 				"type": "uint256"
 			}
 		],
-		"name": "devolveNomeProprietario",
+		"name": "eventoEstornoRealizado",
+		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "carteiraCompanhiaAerea",
 		"outputs": [
 			{
 				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
 				"type": "string"
+			},
+			{
+				"name": "b",
+				"type": "string"
+			}
+		],
+		"name": "comparacaoStrings",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "dataEncerramentoVendas",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "limiteAviao",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "mapeamentoReservaPorNome",
+		"outputs": [
+			{
+				"name": "nomePassageiro",
+				"type": "string"
+			},
+			{
+				"name": "carteiraCliente",
+				"type": "address"
+			},
+			{
+				"name": "carteiraAgencia",
+				"type": "address"
+			},
+			{
+				"name": "estornoParaAgencia",
+				"type": "bool"
+			},
+			{
+				"name": "estornoRealizado",
+				"type": "bool"
 			}
 		],
 		"payable": false,
@@ -49,19 +251,27 @@ const contractABI = [
 				"type": "uint256"
 			}
 		],
-		"name": "livro1",
+		"name": "passageiros",
 		"outputs": [
 			{
-				"name": "endereco",
-				"type": "address"
-			},
-			{
-				"name": "nomeProprietario",
+				"name": "nomePassageiro",
 				"type": "string"
 			},
 			{
-				"name": "valorVenal",
-				"type": "uint256"
+				"name": "carteiraCliente",
+				"type": "address"
+			},
+			{
+				"name": "carteiraAgencia",
+				"type": "address"
+			},
+			{
+				"name": "estornoParaAgencia",
+				"type": "bool"
+			},
+			{
+				"name": "estornoRealizado",
+				"type": "bool"
 			}
 		],
 		"payable": false,
@@ -76,18 +286,54 @@ const contractABI = [
 				"type": "address"
 			}
 		],
-		"name": "livro2",
+		"name": "passageirosPorAgencia",
 		"outputs": [
 			{
-				"name": "endereco",
-				"type": "address"
-			},
-			{
-				"name": "nomeProprietario",
+				"name": "nomePassageiro",
 				"type": "string"
 			},
 			{
-				"name": "valorVenal",
+				"name": "carteiraCliente",
+				"type": "address"
+			},
+			{
+				"name": "carteiraAgencia",
+				"type": "address"
+			},
+			{
+				"name": "estornoParaAgencia",
+				"type": "bool"
+			},
+			{
+				"name": "estornoRealizado",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "valorPassagem",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "verificarCadeirasSobrando",
+		"outputs": [
+			{
+				"name": "",
 				"type": "uint256"
 			}
 		],
@@ -98,7 +344,7 @@ const contractABI = [
 ];
 
 if (network === "4") {
-    contractAddress = "0xcae333e43b2b6dcd064edbe32343a93d1e09d760"; 
+    contractAddress = "0x0738f14bc380a2a0507e3831b743865b2d88f0f1"; 
 } else {
     contractAddress = "0xe7402e8cde5566c926f8103b793fa6eeec13c2b5"; 
 }
