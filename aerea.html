@@ -88,7 +88,7 @@
                     return
                 }
                 $("#resultadoVerificacao").html("O número de cadeiras disponíveis é: " + resultado);
-            })
+            }
         }
 		function declararPouso() {
 			event.preventDefault();
@@ -101,7 +101,7 @@
 						return
 				}
                 waitForTxToBeMined(resultado, "#statusTransacao");
-			})
+			}
         }
 		function cancelarEEstornar() {
 			event.preventDefault();
@@ -114,7 +114,7 @@
 						return
 				}
                 waitForTxToBeMined(resultado, "#statusTransacao");
-			})
+			}
         }
 		var frmEstornoIndividual = document.estornarCliente;
 		function estornoIndividual() {
@@ -128,7 +128,7 @@
                     return
 				}
 				waitForTxToBeMined(resultado, "#statusTransacao");
-			})
+			}
         }
 		
     </script>
