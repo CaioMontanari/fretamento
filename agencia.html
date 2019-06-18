@@ -70,7 +70,7 @@
             $("#statusTransacao").html("&nbsp;");
             contract.reserva(frmReserva.nomeCliente.value, frmReserva.carteiraCliente.value, frmReserva.valor.value, {from: web3.eth.accounts[0], gas: 3000000, value: 100000}, function (erro, resultado) {
                 if (erro) {
-                    console.log("efetuarReserva");
+                    console.log("reserva");
                     console.error(erro);
                     alert("Houve um erro ao efetuar esta reserva");
                     return
@@ -83,7 +83,7 @@
             $("#resultadoVerificacao").html("");
             contract.verificarCadeirasSobrando(), function (erro, resultado) {
                 if (erro) {
-                    console.log("verificarCadeiras");
+                    console.log("verificarCadeirasSobrando");
                     console.error(erro);
                     alert("Houve um erro ao verificar cadeiras restantes");
                     return
