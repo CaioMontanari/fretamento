@@ -1,0 +1,136 @@
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Página do Executante</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Manejamento do Vôo nº *****</h1>
+        <br>
+        <h2>Verificar nº de cadeiras restantes</h2>
+		<div id="cadeirasRestantes">
+            <form action="#" method="get" name="nCadeirasRestantes" id="nCadeirasRestantes">
+                <div>
+                    <label for="verificarCadeirasRestantes">Verifique o número de cadeiras restantes: </label>
+                
+                </div>
+                <div>
+                    <button onclick="verificarCadeirasSobrando()">Verificar</button>
+                </div>
+            </form>
+            <div id="resultadoVerificacao"></div>
+        </div>
+		<br>
+		<hr>
+		<br>
+		<h2>Registrar Pouso</h2>
+		<div id="pouso">
+            <form action="#" method="POST" name="pouso" id="pouso">
+                <div>
+                    <button onclick="declararPouso()">Registrar Pouso</button>
+                </div>
+            </form>
+            <br>
+            <div>
+                <div id="statusTransacao">&nbsp;</div>
+            </div>
+        </div>
+		<br>
+		<hr>
+		<br>
+		<h2>Cancelar vôo e estornar clientes</h2>
+		<div id="cancelamento">
+            <form action="#" method="POST" name="cancelamento" id="cancelamento">
+                <div>
+                    <button onclick="cancelarEEstornar()">Cancelar Vôo</button>
+                </div>
+            </form>
+            <br>
+            <div>
+                <div id="statusTransacao">&nbsp;</div>
+            </div>
+        </div>
+		<h2>Estorno Individual</h2>
+        <br>
+        <div id="estornoIndividual">
+            <form action="#" method="POST" name="estornarCliente" id="estornarCliente">
+                <div>
+                    <label for="nomeCliente">Informe o nome do cliente: </label>
+                    <input type="text" name="nomeCliente" id="nomeCliente" size="45" />
+                </div>
+                <div>
+                    <button onclick="estornoIndividual()">Estornar</button>
+                </div>
+            </form>
+            <br>
+            <div>
+                <div id="statusTransacao">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="connectToSmartContract.js"></script>
+    <script src="abi.js"></script>
+    <script>
+        function verificarCadeiras() {
+            event.preventDefault();
+            $("#resultadoVerificacao").html("");
+            contract.verificarCadeirasSobrando(), function (erro, resultado) {
+                if (erro) {
+                    console.log("verificarCadeiras");
+                    console.error(erro);
+                    alert("Houve um erro ao verificar cadeiras restantes");
+                    return
+                }
+                $("#resultadoVerificacao").html("O número de cadeiras disponíveis é: " + resultado);
+            }
+        }
+		function declararPouso() {
+			event.preventDefault();
+			$("#statusTransacao").html("&nbsp;");
+			contract.pousoSeguro(), function (erro, resultado) {
+				if (erro) {
+					console.log("verificarCadeiras");
+						console.error(erro);
+						alert("Erro na execução da função");
+						return
+				}
+                waitForTxToBeMined(resultado, "#statusTransacao");
+			}
+        }
+		function cancelarEEstornar() {
+			event.preventDefault();
+			$("#statusTransacao").html("&nbsp;");
+			contract.cancelamentoEEstornoDeTodos(), function (erro, resultado) {
+				if (erro) {
+					console.log("verificarCadeiras");
+						console.error(erro);
+						alert("Erro na execução da função");
+						return
+				}
+                waitForTxToBeMined(resultado, "#statusTransacao");
+			}
+        }
+		var frmEstornoIndividual = document.estornarCliente;
+		function estornoIndividual() {
+			event.preventDefault();
+            $("#statusTransacao").html("&nbsp;");
+			contract.estornoIndividual(frmEstornoIndividual.nomeCliente.value), function (erro, resultado) {
+			if (erro) {
+                    console.log("pesquisarImovel");
+                    console.error(erro);
+                    alert("Erro na execução da função");
+                    return
+				}
+				waitForTxToBeMined(resultado, "#statusTransacao");
+			}
+        }
+		
+    </script>
+</body>
+</html>
