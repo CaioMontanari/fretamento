@@ -1,0 +1,96 @@
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <title>Página das Agências de Turismo</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Ações do Contrato</h1>
+        <br>
+        <h2>Efetuar Reserva</h2>
+        <br>
+        <div id="reserva">
+            <form action="#" method="POST" name="formReserva" id="formReserva">
+                <div>
+                    <label for="nomeCLiente">Informe o nome do passageiro: </label>
+                    <input type="text" name="nomeCliente" id="nomeCliente" size="45" />
+                </div>
+                <div>
+                    <label for="carteiraCliente">Informe a carteira do Cliente: </label>
+                    <input type="text" name="carteiraCliente" id="carteiraCliente" />
+                </div>
+                <div>
+                    <label for="carteiraAgencia">Informe a Carteira da Agência: </label>
+                    <input type="text" name="carteiraAgencia" id="carteiraAgencia" />
+                </div>
+				<div>
+                    <label for="estornoAgencia">Informe se eventual estorno deverá ser feito à Agência: </label>
+					<br>
+                    <input type="radio" name="estornoAgencia" id="estornoAgencia" value="sim"/> Sim<br>
+					<input type="radio" name="estornoAgencia" id="estornoAgencia" value="nao"/> Não
+                </div>
+                <div>
+                    <button onclick="efetuarReserva()">Reservar</button>
+                </div>
+            </form>
+            <br>
+            <div>
+                <div id="statusTransacao">&nbsp;</div>
+            </div>
+            
+        </div>
+		<br>
+		<hr>
+		<br>
+		<h2>Verificar nº de cadeiras restantes</h2>
+		<div id="cadeirasRestantes">
+            <form action="#" method="get" name="nCadeirasRestantes" id="nCadeirasRestantes">
+                <div>
+                    <label for="verificarCadeirasRestantes">Verifique o número de cadeiras restantes: </label>
+                
+                </div>
+                <div>
+                    <button onclick="verificarCadeirasSobrando()">Verificar</button>
+                </div>
+            </form>
+            <div id="resultadoVerificacao"></div>
+        </div>
+	</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="connectToSmartContract.js"></script>
+    <script src="abi.js"></script>
+    <script>
+        var frmReserva = document.formReserva;
+        function efetuarReserva() {
+            event.preventDefault();
+            $("#statusTransacao").html("&nbsp;");
+            contract.reserva(frmReserva.nomeCliente.value, frmReserva.carteiraCliente.value, frmReserva.valor.value, {from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
+                if (erro) {
+                    console.log("efetuarReserva");
+                    console.error(erro);
+                    alert("Houve um erro ao efetuar esta reserva");
+                    return
+                }
+                waitForTxToBeMined(resultado, "#statusTransacao");
+            })
+        }
+        function verificarCadeiras() {
+            event.preventDefault();
+            $("#resultadoVerificacao").html("");
+            contract.verificarCadeirasSobrando(), function (erro, resultado) {
+                if (erro) {
+                    console.log("verificarCadeiras");
+                    console.error(erro);
+                    alert("Houve um erro ao verificar cadeiras restantes");
+                    return
+                }
+                $("#resultadoVerificacao").html("O número de cadeiras disponíveis é: " + resultado);
+            })
+        }
+    </script>
+</body>
+</html>
