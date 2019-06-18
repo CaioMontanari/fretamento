@@ -82,7 +82,7 @@
             $("#resultadoVerificacao").html("");
             contract.verificarCadeirasSobrando(), function (erro, resultado) {
                 if (erro) {
-                    console.log("verificarCadeiras");
+                    console.log("verificarCadeirasSobrando");
                     console.error(erro);
                     alert("Houve um erro ao verificar cadeiras restantes");
                     return
@@ -95,7 +95,7 @@
 			$("#statusTransacao").html("&nbsp;");
 			contract.pousoSeguro(), function (erro, resultado) {
 				if (erro) {
-					console.log("verificarCadeiras");
+					console.log("pousoSeguro");
 						console.error(erro);
 						alert("Erro na execução da função");
 						return
@@ -108,7 +108,7 @@
 			$("#statusTransacao").html("&nbsp;");
 			contract.cancelamentoEEstornoDeTodos(), function (erro, resultado) {
 				if (erro) {
-					console.log("verificarCadeiras");
+					console.log("cancelamentoEEstornoDeTodos");
 						console.error(erro);
 						alert("Erro na execução da função");
 						return
@@ -122,7 +122,7 @@
             $("#statusTransacao").html("&nbsp;");
 			contract.estornoIndividual(frmEstornoIndividual.nomeCliente.value), function (erro, resultado) {
 			if (erro) {
-                    console.log("pesquisarImovel");
+                    console.log("estornoIndividual");
                     console.error(erro);
                     alert("Erro na execução da função");
                     return
