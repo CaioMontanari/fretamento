@@ -29,8 +29,8 @@
 				<div>
                     <label for="estornoAgencia">Informe se eventual estorno deverá ser feito à Agência: </label>
 					<br>
-                    <input type="radio" name="estornoAgencia" id="estornoAgencia" value="sim"/> Sim<br>
-					<input type="radio" name="estornoAgencia" id="estornoAgencia" value="nao"/> Não
+                    <input type="radio" name="estornoAgencia" id="estornoAgencia" value="true"/> Sim<br>
+					<input type="radio" name="estornoAgencia" id="estornoAgencia" value="false"/> Não
                 </div>
                 <div>
                     <button onclick="efetuarReserva()">Reservar</button>
@@ -53,7 +53,7 @@
                 
                 </div>
                 <div>
-                    <button onclick="verificarCadeirasSobrando()">Verificar</button>
+                    <button onclick="verificarCadeiras()">Verificar</button>
                 </div>
             </form>
             <div id="resultadoVerificacao"></div>
