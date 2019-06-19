@@ -93,7 +93,7 @@
 		function declararPouso() {
 			event.preventDefault();
 			$("#statusTransacao").html("&nbsp;");
-			contract.pousoSeguro(), function (erro, resultado) {
+			contract.pousoSeguro({from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
 				if (erro) {
 					console.log("pousoSeguro");
 						console.error(erro);
@@ -101,12 +101,12 @@
 						return
 				}
                 waitForTxToBeMined(resultado, "#statusTransacao");
-			}
+			});
         }
 		function cancelarEEstornar() {
 			event.preventDefault();
 			$("#statusTransacao").html("&nbsp;");
-			contract.cancelamentoEEstornoDeTodos(), function (erro, resultado) {
+			contract.cancelamentoEEstornoDeTodos({from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
 				if (erro) {
 					console.log("cancelamentoEEstornoDeTodos");
 						console.error(erro);
@@ -114,13 +114,13 @@
 						return
 				}
                 waitForTxToBeMined(resultado, "#statusTransacao");
-			}
+			});
         }
 		var frmEstornoIndividual = document.estornarCliente;
 		function estornoIndividual() {
 			event.preventDefault();
             $("#statusTransacao").html("&nbsp;");
-			contract.estornoIndividual(frmEstornoIndividual.nomeCliente.value), function (erro, resultado) {
+			contract.estornoIndividual(frmEstornoIndividual.nomeCliente.value, {from: web3.eth.accounts[0], gas: 3000000, value: 0},  function (erro, resultado) {
 			if (erro) {
                     console.log("estornoIndividual");
                     console.error(erro);
@@ -128,7 +128,7 @@
                     return
 				}
 				waitForTxToBeMined(resultado, "#statusTransacao");
-			}
+			});
         }
 		
     </script>
