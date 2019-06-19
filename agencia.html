@@ -22,11 +22,7 @@
                     <label for="carteiraCliente">Informe a carteira do Cliente: </label>
                     <input type="text" name="carteiraCliente" id="carteiraCliente" />
                 </div>
-                <div>
-                    <label for="carteiraAgencia">Informe a Carteira da Agência: </label>
-                    <input type="text" name="carteiraAgencia" id="carteiraAgencia" />
-                </div>
-				<div>
+		<div>
                     <label for="estornoAgencia">Informe se eventual estorno deverá ser feito à Agência: </label>
 					<br>
                     <input type="radio" name="estornoAgencia" id="estornoAgencia" value="true"/> Sim<br>
@@ -68,7 +64,7 @@
         function efetuarReserva() {
             event.preventDefault();
             $("#statusTransacao").html("&nbsp;");
-            contract.reserva(frmReserva.nomeCliente.value, frmReserva.carteiraCliente.value, frmReserva.valor.value, {from: web3.eth.accounts[0], gas: 3000000, value: 100000}, function (erro, resultado) {
+            contract.reserva(frmReserva.nomeCliente.value, frmReserva.carteiraCliente.value, frmReserva.estornoAgencia.value, {from: web3.eth.accounts[0], gas: 3000000, value: 100000}, function (erro, resultado) {
                 if (erro) {
                     console.log("reserva");
                     console.error(erro);
