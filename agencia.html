@@ -76,12 +76,12 @@
                     return
                 }
                 waitForTxToBeMined(resultado, "#statusTransacao");
-            })
+            });
         }
         function verificarCadeiras() {
             event.preventDefault();
             $("#resultadoVerificacao").html("");
-            contract.verificarCadeirasSobrando(), function (erro, resultado) {
+            contract.verificarCadeirasSobrando(function (erro, resultado) {
                 if (erro) {
                     console.log("verificarCadeirasSobrando");
                     console.error(erro);
@@ -89,7 +89,7 @@
                     return
                 }
                 $("#resultadoVerificacao").html("O número de cadeiras disponíveis é: " + resultado);
-            }
+            });
         }
     </script>
 </body>
