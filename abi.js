@@ -344,7 +344,7 @@ const contractABI = [
 ];
 
 if (network === "4") {
-    contractAddress = "0x0738f14bc380a2a0507e3831b743865b2d88f0f1"; 
+    contractAddress = "0xe2b37de9517039196649c1591be5242358776317"; 
 } else {
     contractAddress = "0xe7402e8cde5566c926f8103b793fa6eeec13c2b5"; 
 }
