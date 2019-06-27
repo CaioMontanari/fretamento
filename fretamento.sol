@@ -80,16 +80,16 @@ contract FreteAviao {
                 require (!passageiros[i].estornoRealizado);
                 address payable carteiraDeEstorno = passageiros[i].carteiraAgencia;
                 carteiraDeEstorno.transfer(valorPassagem);
+                passageiros[i].estornoRealizado = true;
                 emit eventoEstornoRealizado (passageiros[i].nomePassageiro, carteiraDeEstorno, valorPassagem);
             }
             else {
                 require (!passageiros[i].estornoRealizado);
                 address payable carteiraDeEstorno = passageiros[i].carteiraCliente;
                 carteiraDeEstorno.transfer(valorPassagem);
+                passageiros[i].estornoRealizado = true;
                 emit eventoEstornoRealizado (passageiros[i].nomePassageiro, carteiraDeEstorno, valorPassagem);
             } 
-            passageiros[i].estornoRealizado = true;
-            
         }
         vooCancelado = true;
     }
@@ -115,15 +115,16 @@ contract FreteAviao {
                     require (!passageiros[i].estornoRealizado);
                     address payable carteiraDeEstorno = passageiros[i].carteiraAgencia;
                     carteiraDeEstorno.transfer(valorPassagem);
+                    passageiros[i].estornoRealizado = true;
                     emit eventoEstornoRealizado (passageiros[i].nomePassageiro, carteiraDeEstorno, valorPassagem);
                 }
                 else {
                     require (!passageiros[i].estornoRealizado);
                     address payable carteiraDeEstorno = passageiros[i].carteiraCliente;
                     carteiraDeEstorno.transfer(valorPassagem);
+                    passageiros[i].estornoRealizado = true;
                     emit eventoEstornoRealizado (passageiros[i].nomePassageiro, carteiraDeEstorno, valorPassagem);
                 }
-                passageiros[i].estornoRealizado = true; 
             }    
         }
    }  
