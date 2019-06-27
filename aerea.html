@@ -26,6 +26,22 @@
 		<br>
 		<hr>
 		<br>
+	  <h2>Encerrar período de reservas</h2>
+		<div id="encerrarReservas">
+            <form action="#" method="POST" name="nEncerrarReservas" id="nEncerrarReservas">
+                <div>
+                    <label for="encerrarReservas">Encerrar período de reservas: </label>
+                
+                </div>
+                <div>
+                    <button onclick="encerrarVendas()">Encerrar</button>
+                </div>
+            </form>
+            <div id="statusTransacao">&nbsp;</div>
+        </div>
+	    	<br>
+		<hr>
+		<br>
 		<h2>Registrar Pouso</h2>
 		<div id="pouso">
             <form action="#" method="POST" name="pouso" id="pouso">
@@ -96,6 +112,20 @@
 			contract.pousoSeguro({from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
 				if (erro) {
 					console.log("pousoSeguro");
+						console.error(erro);
+						alert("Erro na execução da função");
+						return
+				}
+                waitForTxToBeMined(resultado, "#statusTransacao");
+			});
+        }
+	    
+	    	function encerrarVendas() {
+			event.preventDefault();
+			$("#statusTransacao").html("&nbsp;");
+			contract.encerrarReservas({from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
+				if (erro) {
+					console.log("encerrarReservas");
 						console.error(erro);
 						alert("Erro na execução da função");
 						return
