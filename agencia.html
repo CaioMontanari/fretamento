@@ -64,7 +64,7 @@
         function efetuarReserva() {
             event.preventDefault();
             $("#statusTransacao").html("&nbsp;");
-            contract.reserva(frmReserva.nomeCliente.value, frmReserva.carteiraCliente.value, frmReserva.estornoAgencia.value, {from: web3.eth.accounts[0], gas: 3000000, value: 1000000}, function (erro, resultado) {
+            contract.reserva(frmReserva.nomeCliente.value, frmReserva.carteiraCliente.value, frmReserva.estornoAgencia.value, {from: web3.eth.accounts[1], gas: 3000000, value: 1000000}, function (erro, resultado) {
                 if (erro) {
                     console.log("reserva");
                     console.error(erro);
