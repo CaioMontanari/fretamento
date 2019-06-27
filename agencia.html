@@ -24,9 +24,9 @@
                 </div>
 		<div>
                     <label for="estornoAgencia">Informe se eventual estorno deverá ser feito à Agência: </label>
-					<br>
-                    <input type="radio" name="estornoAgencia" id="estornoAgencia" value="true"/> Sim<br>
-					<input type="radio" name="estornoAgencia" id="estornoAgencia" value="false"/> Não
+                    <select name="estornoAgencia" id="estornoAgencia">
+                        <option value="true">Sim</option>
+                        <option value="false">Não</option>
                 </div>
                 <div>
                     <button onclick="efetuarReserva()">Reservar</button>
