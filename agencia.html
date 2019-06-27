@@ -127,7 +127,7 @@
 	function alterarEstornoParaAgencia() { 
 		 event.preventDefault();
             $("#statusTransacao").html("&nbsp;");
-            contract.informarEstornoAgencia(frmEstornoCliente.nomeCliente.value, {from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
+            contract.informarEstornoAgencia(frmEstornoAgencia.nomeCliente.value, {from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
                 if (erro) {
                     console.log("informarEstornoAgencia");
                     console.error(erro);
