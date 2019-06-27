@@ -114,7 +114,7 @@
 	 function alterarEstornoParaCliente() { 
 		 event.preventDefault();
             $("#statusTransacao").html("&nbsp;");
-            contract.informarEstornoCliente(frmEstornoCliente.nomeCliente.value, {from: web3.eth.accounts[1], gas: 3000000, value: 0}, function (erro, resultado) {
+            contract.informarEstornoCliente(frmEstornoCliente.nomeCliente.value, {from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
                 if (erro) {
                     console.log("informarEstornoCliente");
                     console.error(erro);
@@ -127,7 +127,7 @@
 	function alterarEstornoParaAgencia() { 
 		 event.preventDefault();
             $("#statusTransacao").html("&nbsp;");
-            contract.informarEstornoAgencia(frmEstornoCliente.nomeCliente.value, {from: web3.eth.accounts[1], gas: 3000000, value: 0}, function (erro, resultado) {
+            contract.informarEstornoAgencia(frmEstornoCliente.nomeCliente.value, {from: web3.eth.accounts[0], gas: 3000000, value: 0}, function (erro, resultado) {
                 if (erro) {
                     console.log("informarEstornoAgencia");
                     console.error(erro);
