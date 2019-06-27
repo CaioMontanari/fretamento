@@ -38,7 +38,7 @@ contract FreteAviao {
         carteiraCompanhiaAerea = _carteiraCompanhiaAerea;
     }
     
-    function reserva (string memory nomePassageiro, address payable carteiraCliente, bool estornoParaAgencia) public payable {
+    function reserva (string memory nomePassageiro, address payable carteiraCliente/*, bool estornoParaAgencia*/) public payable {
         require (now < dataEncerramentoVendas, "Período de compras encerrado.");
         require (!reservasEncerradas, "Período de compras encerrado.");
         require (msg.value == valorPassagem, "Incorreto o valor da passagem.");
@@ -47,7 +47,7 @@ contract FreteAviao {
         
         address payable carteiraAgencia = msg.sender;
         
-        passagem memory passagemReservada = passagem (nomePassageiro, carteiraCliente, carteiraAgencia, estornoParaAgencia, false);
+        passagem memory passagemReservada = passagem (nomePassageiro, carteiraCliente, carteiraAgencia, /*estornoParaAgencia*/ false, false);
         passageiros.push(passagemReservada);
         passageirosPorAgencia[carteiraAgencia] = passagemReservada;
         mapeamentoReservaPorNome[nomePassageiro] = passagemReservada;
@@ -55,7 +55,30 @@ contract FreteAviao {
         emit reservaEfetuada ("Reserva efetuada com sucesso.", nomePassageiro, carteiraAgencia);
     } 
         
-     function verificarCadeirasSobrando() public view returns (uint) {
+    
+    function informarEstornoAgencia(string memory nomeClientePesquisado) public {
+        for (uint i=0; i < passageiros.length; i++){
+            if (comparacaoStrings (nomeClientePesquisado, passageiros[i].nomePassageiro)) {
+                if (passageiros[i].estornoParaAgencia) {
+                    require (!passageiros[i].estornoRealizado);
+                    passageiros[i].estornoParaAgencia = true;
+                }
+            }
+        }
+    }
+    
+    function informarEstornoCliente(string memory nomeClientePesquisado) public {
+        for (uint i=0; i < passageiros.length; i++){
+            if (comparacaoStrings (nomeClientePesquisado, passageiros[i].nomePassageiro)) {
+                if (passageiros[i].estornoParaAgencia) {
+                    require (!passageiros[i].estornoRealizado);
+                    passageiros[i].estornoParaAgencia = false;
+                }
+            }
+        }
+    }
+    
+    function verificarCadeirasSobrando() public view returns (uint) {
         uint x = 0;
         for (uint i=0; i < passageiros.length; i++){
             if (!passageiros[i].estornoRealizado) {
