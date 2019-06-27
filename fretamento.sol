@@ -16,6 +16,7 @@ contract FreteAviao {
     
     bool pousoRealizado;
     bool vooCancelado;
+    bool reservasEncerradas;
     
     event reservaEfetuada (string aviso, string nomePassageiro, address carteiraAgencia);
     event pousoEfetuadoComSucesso (string aviso, string nomePassageiro, address carteiraAgencia);
@@ -39,6 +40,7 @@ contract FreteAviao {
     
     function reserva (string memory nomePassageiro, address payable carteiraCliente, bool estornoParaAgencia) public payable {
         require (now < dataEncerramentoVendas, "Período de compras encerrado.");
+        require (!reservasEncerradas, "Período de compras encerrado.");
         require (msg.value == valorPassagem, "Incorreto o valor da passagem.");
         require (passageiros.length < limiteAviao, "Não há passagens disponíveis.");
         require (!vooCancelado, "Voo cancelado.");
@@ -63,7 +65,11 @@ contract FreteAviao {
         uint cadeirasRestantes = limiteAviao - x;
         return cadeirasRestantes;
      }
-        
+    
+    function encerrarReservas () somenteCompanhiaAerea public {
+        reservasEncerradas = true;
+    }
+    
     function pousoSeguro () somenteCompanhiaAerea public {
         require (now > dataEncerramentoVendas, "Voo ainda não saiu.");
         require (!vooCancelado, "Voo cancelado.");
