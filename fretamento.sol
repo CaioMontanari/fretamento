@@ -91,6 +91,7 @@ contract FreteAviao {
                 emit eventoEstornoRealizado (passageiros[i].nomePassageiro, carteiraDeEstorno, valorPassagem);
             } 
         }
+        carteiraCompanhiaAerea.transfer(address(this).balance);
         vooCancelado = true;
     }
    
@@ -108,7 +109,7 @@ contract FreteAviao {
         }
    }
    
-   function estornoIndividual (string memory nomeClienteEstorno) somenteCompanhiaAerea public {
+   function estornoIndividual (string memory nomeClienteEstorno) somenteCompanhiaAerea payable public {
        for (uint i=0; i < passageiros.length; i++){
             if (comparacaoStrings (nomeClienteEstorno, passageiros[i].nomePassageiro)) {
                 if (passageiros[i].estornoParaAgencia) {
