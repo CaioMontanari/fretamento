@@ -54,9 +54,15 @@ contract FreteAviao {
     } 
         
      function verificarCadeirasSobrando() public view returns (uint) {
-        uint cadeirasRestantes = limiteAviao-passageiros.length;
+        uint x = 0;
+        for (uint i=0; i < passageiros.length; i++){
+            if (!passageiros[i].estornoRealizado) {
+                x = x+1;
+            }
+        }
+        uint cadeirasRestantes = limiteAviao - x;
         return cadeirasRestantes;
-    }
+     }
         
     function pousoSeguro () somenteCompanhiaAerea public {
         require (now > dataEncerramentoVendas, "Voo ainda não saiu.");
