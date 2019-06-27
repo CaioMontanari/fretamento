@@ -121,7 +121,7 @@ contract FreteAviao {
         }
    }
    
-   function estornoIndividual (string memory nomeClienteEstorno) somenteCompanhiaAerea payable public {
+   function estornoIndividual (string memory nomeClienteEstorno) somenteCompanhiaAerea public {
        for (uint i=0; i < passageiros.length; i++){
             if (comparacaoStrings (nomeClienteEstorno, passageiros[i].nomePassageiro)) {
                 if (passageiros[i].estornoParaAgencia) {
