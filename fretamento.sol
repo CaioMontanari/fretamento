@@ -59,7 +59,7 @@ contract FreteAviao {
     function informarEstornoAgencia(string memory nomeClientePesquisado) public {
         for (uint i=0; i < passageiros.length; i++){
             if (comparacaoStrings (nomeClientePesquisado, passageiros[i].nomePassageiro)) {
-                if (passageiros[i].estornoParaAgencia) {
+                if (!passageiros[i].estornoParaAgencia) {
                     require (!passageiros[i].estornoRealizado);
                     passageiros[i].estornoParaAgencia = true;
                 }
