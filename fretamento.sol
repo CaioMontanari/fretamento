@@ -71,7 +71,7 @@ contract FreteAviao {
     }
     
     function pousoSeguro () somenteCompanhiaAerea public {
-        require (now > dataEncerramentoVendas, "Voo ainda não saiu.");
+        //require (now > dataEncerramentoVendas, "Voo ainda não saiu.");
         require (!vooCancelado, "Voo cancelado.");
         
         for (uint i=0; i < passageiros.length; i++){
