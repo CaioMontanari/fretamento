@@ -1,12 +1,54 @@
 /* This is for example purposes */
 const contractABI = [
 	{
-		"constant": false,
+		"constant": true,
 		"inputs": [],
-		"name": "cancelamentoEEstornoDeTodos",
-		"outputs": [],
+		"name": "limiteAviao",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
 		"payable": false,
-		"stateMutability": "nonpayable",
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "dataEncerramentoVendas",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "a",
+				"type": "string"
+			},
+			{
+				"name": "b",
+				"type": "string"
+			}
+		],
+		"name": "comparacaoStrings",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "pure",
 		"type": "function"
 	},
 	{
@@ -24,12 +66,168 @@ const contractABI = [
 		"type": "function"
 	},
 	{
+		"constant": true,
+		"inputs": [],
+		"name": "carteiraCompanhiaAerea",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "verificarCadeirasSobrando",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"constant": false,
 		"inputs": [],
 		"name": "pousoSeguro",
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "passageiros",
+		"outputs": [
+			{
+				"name": "nomePassageiro",
+				"type": "string"
+			},
+			{
+				"name": "carteiraCliente",
+				"type": "address"
+			},
+			{
+				"name": "carteiraAgencia",
+				"type": "address"
+			},
+			{
+				"name": "estornoParaAgencia",
+				"type": "bool"
+			},
+			{
+				"name": "estornoRealizado",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "valorPassagem",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "passageirosPorAgencia",
+		"outputs": [
+			{
+				"name": "nomePassageiro",
+				"type": "string"
+			},
+			{
+				"name": "carteiraCliente",
+				"type": "address"
+			},
+			{
+				"name": "carteiraAgencia",
+				"type": "address"
+			},
+			{
+				"name": "estornoParaAgencia",
+				"type": "bool"
+			},
+			{
+				"name": "estornoRealizado",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "cancelamentoEEstornoDeTodos",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "mapeamentoReservaPorNome",
+		"outputs": [
+			{
+				"name": "nomePassageiro",
+				"type": "string"
+			},
+			{
+				"name": "carteiraCliente",
+				"type": "address"
+			},
+			{
+				"name": "carteiraAgencia",
+				"type": "address"
+			},
+			{
+				"name": "estornoParaAgencia",
+				"type": "bool"
+			},
+			{
+				"name": "estornoRealizado",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -142,204 +340,6 @@ const contractABI = [
 		],
 		"name": "eventoEstornoRealizado",
 		"type": "event"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "carteiraCompanhiaAerea",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "a",
-				"type": "string"
-			},
-			{
-				"name": "b",
-				"type": "string"
-			}
-		],
-		"name": "comparacaoStrings",
-		"outputs": [
-			{
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "pure",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "dataEncerramentoVendas",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "limiteAviao",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "string"
-			}
-		],
-		"name": "mapeamentoReservaPorNome",
-		"outputs": [
-			{
-				"name": "nomePassageiro",
-				"type": "string"
-			},
-			{
-				"name": "carteiraCliente",
-				"type": "address"
-			},
-			{
-				"name": "carteiraAgencia",
-				"type": "address"
-			},
-			{
-				"name": "estornoParaAgencia",
-				"type": "bool"
-			},
-			{
-				"name": "estornoRealizado",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "passageiros",
-		"outputs": [
-			{
-				"name": "nomePassageiro",
-				"type": "string"
-			},
-			{
-				"name": "carteiraCliente",
-				"type": "address"
-			},
-			{
-				"name": "carteiraAgencia",
-				"type": "address"
-			},
-			{
-				"name": "estornoParaAgencia",
-				"type": "bool"
-			},
-			{
-				"name": "estornoRealizado",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "passageirosPorAgencia",
-		"outputs": [
-			{
-				"name": "nomePassageiro",
-				"type": "string"
-			},
-			{
-				"name": "carteiraCliente",
-				"type": "address"
-			},
-			{
-				"name": "carteiraAgencia",
-				"type": "address"
-			},
-			{
-				"name": "estornoParaAgencia",
-				"type": "bool"
-			},
-			{
-				"name": "estornoRealizado",
-				"type": "bool"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "valorPassagem",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "verificarCadeirasSobrando",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
 	}
 ];
 
