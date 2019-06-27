@@ -22,10 +22,6 @@
                     <label for="carteiraCliente">Informe a carteira do Cliente: </label>
                     <input type="text" name="carteiraCliente" id="carteiraCliente" />
                 </div>
-		<div>
-                    <label for="estornoAgencia">Informe se eventual estorno deverá ser feito à Agência (insira 'true' para sim e 'false' para não: </label>
-                    <input type="text" name="estornoAgencia" id="estornoAgencia" />
-                </div>
                 <div>
                     <button onclick="efetuarReserva()">Reservar</button>
                 </div>
@@ -36,6 +32,45 @@
             </div>
             
         </div>
+	    <br>
+	    <br>
+	<div id "informarEstornoParaAgencia">
+		<form action="#" method="POST" name="formEstornoAgencia" id="formEstornoAgencia">
+                <div>
+                    <label for="informarEstornoParaagencia">Caso deseje que eventual estorno seja realizado para a Carteira da Agência, informe o nome do Passageiro clique em 'alterar' 
+			    <br> 
+			    O estorno ao Passageiro é a opção padrão da reserva  </label>
+                    <input type="text" name="nomeCliente" id="nomeCliente" size="45" />
+                </div>
+		<div>
+                    <button onclick="alterarEstornoParaAgencia()">Alterar</button>
+                </div>
+		</form>
+            <br>
+            <div>
+                <div id="statusTransacao">&nbsp;</div>
+            </div>
+            
+        </div>
+	    	<br>
+	    	<br>
+	    <div id "informarEstornoParaCliente">
+		<form action="#" method="POST" name="formEstornoCliente" id="formEstornoCliente">
+                <div>
+                    <label for="informarEstornoParaCliente">Caso deseje que eventual estorno seja realizado para a Carteira do Passageiro, informe seu nome e clique em 'alterar' 
+			    <br> 
+			    O estorno ao Passageiro é a opção padrão da reserva  </label>
+                    <input type="text" name="nomeCliente" id="nomeCliente" size="45" />
+                </div>
+		<div>
+                    <button onclick="alterarEstornoParaCliente()">Alterar</button>
+                </div>
+		</form>
+            <br>
+            <div>
+                <div id="statusTransacao">&nbsp;</div>
+            </div>
+	   </div>
 		<br>
 		<hr>
 		<br>
@@ -59,10 +94,13 @@
     <script src="abi.js"></script>
     <script>
         var frmReserva = document.formReserva;
+	var frmEstornoCliente = document.formEstornoCLiente
+	var frmEstornoAgencia = document.formEstornoAgencia
+	
         function efetuarReserva() {
             event.preventDefault();
             $("#statusTransacao").html("&nbsp;");
-            contract.reserva(frmReserva.nomeCliente.value, frmReserva.carteiraCliente.value, frmReserva.estornoAgencia.value, {from: web3.eth.accounts[1], gas: 3000000, value: 1000000}, function (erro, resultado) {
+            contract.reserva(frmReserva.nomeCliente.value, frmReserva.carteiraCliente.value, {from: web3.eth.accounts[1], gas: 3000000, value: 1000000}, function (erro, resultado) {
                 if (erro) {
                     console.log("reserva");
                     console.error(erro);
@@ -72,7 +110,34 @@
                 waitForTxToBeMined(resultado, "#statusTransacao");
             });
         }
-        function verificarCadeiras() {
+        
+	 function alterarEstornoParaCliente() { 
+		 event.preventDefault();
+            $("#statusTransacao").html("&nbsp;");
+            contract.informarEstornoCliente(frmEstornoCliente.nomeCliente.value, {from: web3.eth.accounts[1], gas: 3000000, value: 0}, function (erro, resultado) {
+                if (erro) {
+                    console.log("informarEstornoCliente");
+                    console.error(erro);
+                    alert("Houve um erro ao alterar a informação");
+                    return
+                }
+                waitForTxToBeMined(resultado, "#statusTransacao");
+            });
+        }
+	function alterarEstornoParaAgencia() { 
+		 event.preventDefault();
+            $("#statusTransacao").html("&nbsp;");
+            contract.informarEstornoAgencia(frmEstornoCliente.nomeCliente.value, {from: web3.eth.accounts[1], gas: 3000000, value: 0}, function (erro, resultado) {
+                if (erro) {
+                    console.log("informarEstornoAgencia");
+                    console.error(erro);
+                    alert("Houve um erro ao alterar a informação");
+                    return
+                }
+                waitForTxToBeMined(resultado, "#statusTransacao");
+            });
+        }
+	 function verificarCadeiras() {
             event.preventDefault();
             $("#resultadoVerificacao").html("");
             contract.verificarCadeirasSobrando(function (erro, resultado) {
